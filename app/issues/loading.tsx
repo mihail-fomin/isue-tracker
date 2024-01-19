@@ -1,11 +1,11 @@
-import React from 'react';
-import { Table } from '@radix-ui/themes';
-import IssueActions from './IssueActions';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import React from 'react'
+import { Table } from '@radix-ui/themes'
+import IssueActions from './IssueActions'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const LoadingIssuesPage = () => {
-  const issues = [1, 2, 3, 4, 5];
+  const issues = [1, 2, 3, 4, 5]
 
   return (
     <div>
@@ -14,12 +14,8 @@ const LoadingIssuesPage = () => {
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className="hidden md:table-cell">
-              Status
-            </Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className="hidden md:table-cell">
-              Created
-            </Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">Status</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell className="hidden md:table-cell">Created</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -42,7 +38,7 @@ const LoadingIssuesPage = () => {
         </Table.Body>
       </Table.Root>
     </div>
-  );
-};
+  )
+}
 
-export default LoadingIssuesPage;
+export default LoadingIssuesPage
