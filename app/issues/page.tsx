@@ -7,7 +7,7 @@ import delay from 'delay'
 
 const IssuesPage = async () => {
   const issues = await prisma.issue.findMany()
-  await delay(200000)
+  await delay(2000)
 
   return (
     <div className="mb-5">
