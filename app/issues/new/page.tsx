@@ -8,12 +8,12 @@ import { useForm, Controller } from 'react-hook-form'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { createIssueSchema } from '@/app/api/createIssueSchema'
+import { issueSchema } from '@/app/api/issueSchema'
 import { z } from 'zod'
 import ErrorMessage from '@/app/components/ErrorMessage'
 import Spinner from '@/app/components/Spinner'
 
-type IssueForm = z.infer<typeof createIssueSchema>
+type IssueForm = z.infer<typeof issueSchema>
 
 const NewIssuePage = () => {
   const router = useRouter()
@@ -24,7 +24,7 @@ const NewIssuePage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IssueForm>({
-    resolver: zodResolver(createIssueSchema),
+    resolver: zodResolver(issueSchema),
   })
 
   const [error, setError] = React.useState<string>('')
