@@ -17,6 +17,7 @@ type IssueForm = z.infer<typeof createIssueSchema>
 
 const NewIssuePage = () => {
   const router = useRouter()
+
   const {
     register,
     control,
@@ -25,6 +26,7 @@ const NewIssuePage = () => {
   } = useForm<IssueForm>({
     resolver: zodResolver(createIssueSchema),
   })
+
   const [error, setError] = React.useState<string>('')
   const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false)
 
