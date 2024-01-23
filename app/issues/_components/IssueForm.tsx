@@ -40,7 +40,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
         await axios.post('/api/issues', data)
         toast.success('Issue created successfully')
       }
-      router.push('/issues')
+      router.push('/issues/list')
       router.refresh()
     } catch (error) {
       setSubmitting(false)

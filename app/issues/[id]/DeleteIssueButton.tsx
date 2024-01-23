@@ -17,7 +17,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: string}) => {
       setIsDeleting(true)
       await axios.delete('/api/issues/' + issueId)
       toast.success('Issue has been deleted')
-      router.push('/issues')
+      router.push('/issues/list')
       router.refresh()
     } catch (error) {
       setIsDeleting(false)
