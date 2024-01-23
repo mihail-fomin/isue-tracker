@@ -8,15 +8,21 @@ import toast from 'react-hot-toast'
 
 const DeleteIssueButton = ({ issueId }: { issueId: string}) => {
   const router = useRouter()
+  const [error, setError] = React.useState<boolean>(true)
 
   const handleDeleteButton = async () => {
-    await axios.delete('/api/issues/' + issueId)
-    toast.success('Issue has been deleted')
-    router.push('/issues')
-    router.refresh()
+    try {
+      await axios.delete('/api/issues/' + issueId)
+      toast.success('Issue has been deleted')
+      router.push('/issues')
+      router.refresh()
+    } catch (error) {
+      setError(true)
+    }
   }
 
   return (
+    <>
     <AlertDialog.Root>
       <AlertDialog.Trigger>
         <Button color='red'>Delete Issue</Button>
@@ -33,11 +39,23 @@ const DeleteIssueButton = ({ issueId }: { issueId: string}) => {
           <AlertDialog.Action>
             <Button color='red'
               onClick={handleDeleteButton}
-            >Delete Issue</Button>
+              >Delete Issue</Button>
           </AlertDialog.Action>
         </Flex> 
       </AlertDialog.Content>
     </AlertDialog.Root>
+    <AlertDialog.Root open={error}>
+      <AlertDialog.Content>
+        <AlertDialog.Title>Error</AlertDialog.Title>
+        <AlertDialog.Description>
+          This issue could not be deleted.
+        </AlertDialog.Description>
+        <Button color='gray' variant='soft' mt='2' onClick={() => setError(false)}>
+          OK
+        </Button>
+      </AlertDialog.Content>
+    </AlertDialog.Root>
+    </>
   )
 }
 
