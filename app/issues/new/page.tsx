@@ -12,6 +12,7 @@ import { issueSchema } from '@/app/api/issueSchema'
 import { z } from 'zod'
 import ErrorMessage from '@/app/components/ErrorMessage'
 import Spinner from '@/app/components/Spinner'
+import toast from 'react-hot-toast'
 
 type IssueForm = z.infer<typeof issueSchema>
 
@@ -34,10 +35,13 @@ const NewIssuePage = () => {
     try {
       setIsSubmitting(true)
       await axios.post('/api/issues', data)
+      toast.success('Issue created successfully')
       router.push('/issues')
+      router.refresh()
     } catch (error) {
       setIsSubmitting(false)
       setError('An unexpected error occured')
+      toast.error('Something went wrong')
     }
   })
 

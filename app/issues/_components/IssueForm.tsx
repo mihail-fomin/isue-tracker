@@ -13,6 +13,7 @@ import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import SimpleMDE from 'react-simplemde-editor'
 import { z } from 'zod'
+import toast from 'react-hot-toast'
 
 type IssueFormData = z.infer<typeof issueSchema>
 
@@ -32,13 +33,19 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
   const onSubmit = handleSubmit(async (data) => {
     try {
       setSubmitting(true)
-      if (issue) await axios.patch('/api/issues/' + issue.id, data)
-      else await axios.post('/api/issues', data)
+      if (issue) {
+        await axios.patch('/api/issues/' + issue.id, data)
+        toast.success('Issue updated successfully')
+      } else {
+        await axios.post('/api/issues', data)
+        toast.success('Issue created successfully')
+      }
       router.push('/issues')
       router.refresh()
     } catch (error) {
       setSubmitting(false)
       setError('An unexpected error occurred.')
+      toast.error('Something went wrong')
     }
   })
 
