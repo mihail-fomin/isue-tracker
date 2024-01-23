@@ -5,18 +5,22 @@ import { AlertDialog, Button, Flex } from '@radix-ui/themes'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { Spinner } from '@/app/components'
 
 const DeleteIssueButton = ({ issueId }: { issueId: string}) => {
   const router = useRouter()
-  const [error, setError] = React.useState<boolean>(true)
+  const [error, setError] = React.useState<boolean>(false)
+  const [isDeleting, setIsDeleting] = React.useState<boolean>(false)
 
   const handleDeleteButton = async () => {
     try {
+      setIsDeleting(true)
       await axios.delete('/api/issues/' + issueId)
       toast.success('Issue has been deleted')
       router.push('/issues')
       router.refresh()
     } catch (error) {
+      setIsDeleting(false)
       setError(true)
     }
   }
@@ -25,7 +29,10 @@ const DeleteIssueButton = ({ issueId }: { issueId: string}) => {
     <>
     <AlertDialog.Root>
       <AlertDialog.Trigger>
-        <Button color='red'>Delete Issue</Button>
+        <Button color='red' disabled={isDeleting}>
+          Delete Issue
+          {isDeleting && <Spinner />}
+        </Button>
       </AlertDialog.Trigger>
       <AlertDialog.Content>
         <AlertDialog.Title>Confirm Deletion</AlertDialog.Title>

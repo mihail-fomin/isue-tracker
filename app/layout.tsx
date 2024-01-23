@@ -26,9 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Theme appearance="light" accentColor="purple">
           <NavBar />
           <main className="p-5">
-            <Container>
-              {children}
-            </Container>
+            <Container>{children}</Container>
           </main>
           {/* <ThemePanel /> */}
         </Theme>
