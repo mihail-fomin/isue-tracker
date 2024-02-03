@@ -42,11 +42,16 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
     data: {
       title,
       description,
-      assignedTo: {
-        connect: { id: assignedTo },
-      },
+      assignedTo: assignedTo
+        ? {
+            connect: {
+              id: assignedTo,
+            },
+          }
+        : undefined, // Set to undefined if you want to unassign the issue
     },
-  })
+  });
+
 
   return NextResponse.json(updatedIssue)
 }
