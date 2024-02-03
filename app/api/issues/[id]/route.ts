@@ -5,7 +5,6 @@ import { getServerSession } from 'next-auth'
 import authOptions from '@/app/auth/authOptions'
 
 export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
-  debugger
   const session = await getServerSession(authOptions)
   if (!session) return NextResponse.json({}, { status: 401 })
 
@@ -17,7 +16,6 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
   }
 
   const { assignedTo, title, description } = body
-  console.log('assignedTo: ', assignedTo);
 
   if (assignedTo) {
     const user = await prisma.user.findUnique({
@@ -44,7 +42,9 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
     data: {
       title,
       description,
-      assignedTo,
+      assignedTo: {
+        connect: { id: assignedTo },
+      },
     },
   })
 
