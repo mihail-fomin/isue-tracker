@@ -17,6 +17,8 @@ model Issue {
   status      Status   @default(OPEN)
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
+  assignedTo  User?    @relation(fields: [userId], references: [id])
+  userId      String?
 }
 
 enum Status {
@@ -26,18 +28,18 @@ enum Status {
 }
 
 model Account {
-  id                 String  @id @default(cuid()) @map("_id")
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.String
-  access_token       String?  @db.String
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.String
-  session_state      String?
+  id                String  @id @default(cuid()) @map("_id")
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -60,6 +62,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  Issue         Issue[]
 }
 
 model VerificationToken {
