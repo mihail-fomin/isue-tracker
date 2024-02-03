@@ -1,8 +1,8 @@
 'use client'
 
-import { User } from "@prisma/client"
-import { Select } from "@radix-ui/themes"
-import axios from "axios"
+import { User } from '@prisma/client'
+import { Select } from '@radix-ui/themes'
+import axios from 'axios'
 
 import React from 'react'
 
@@ -12,18 +12,18 @@ const AssigneeSelect = () => {
   React.useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('/api/users');
-        setUsers(response.data);
+        const response = await axios.get('/api/users')
+        setUsers(response.data)
       } catch (error) {
-        console.error('Error fetching users:', error);
+        console.error('Error fetching users:', error)
       }
-    }    
+    }
 
     fetchUsers()
   }, [])
   return (
     <Select.Root>
-      <Select.Trigger placeholder="Assign..."/>
+      <Select.Trigger placeholder="Assign..." />
       <Select.Content>
         <Select.Group>
           <Select.Label>Suggestions</Select.Label>
