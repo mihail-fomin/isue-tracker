@@ -8,6 +8,7 @@ import '@radix-ui/themes/styles.css'
 import { Container, Theme } from '@radix-ui/themes'
 import { Toaster } from 'react-hot-toast'
 import AuthProvider from './auth/Provider'
+import QueryClientProvider from './QueryClientProvider'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -23,16 +24,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <AuthProvider>
-          <Toaster />
-          <Theme appearance="light" accentColor="purple">
-            <NavBar />
-            <main className="p-5">
-              <Container>{children}</Container>
-            </main>
-            {/* <ThemePanel /> */}
-          </Theme>
-        </AuthProvider>
+        <QueryClientProvider>
+          <AuthProvider>
+            <Toaster />
+            <Theme appearance="light" accentColor="purple">
+              <NavBar />
+              <main className="p-5">
+                <Container>{children}</Container>
+              </main>
+              {/* <ThemePanel /> */}
+            </Theme>
+          </AuthProvider>
+        </QueryClientProvider>
       </body>
     </html>
   )
