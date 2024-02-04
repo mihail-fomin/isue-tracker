@@ -22,10 +22,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
       where: { id: assignedTo },
     })
     if (!user) {
-      return NextResponse.json(
-        { error: "Invalid user." },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Invalid user.' }, { status: 400 })
     }
   }
 
@@ -50,8 +47,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
           }
         : undefined, // Set to undefined if you want to unassign the issue
     },
-  });
-
+  })
 
   return NextResponse.json(updatedIssue)
 }

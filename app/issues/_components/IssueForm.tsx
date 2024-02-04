@@ -36,8 +36,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       if (issue) {
         await axios.patch('/api/issues/' + issue.id, data)
         toast.success('Issue has been updated')
-      }
-      else {
+      } else {
         await axios.post('/api/issues', data)
         toast.success('Issue has been created')
       }
