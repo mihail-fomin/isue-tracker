@@ -6,6 +6,7 @@ import axios from 'axios'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { Skeleton } from '@/app/components'
+import toast from 'react-hot-toast'
 
 const AssigneeSelect = ({issue}: { issue: Issue }) => {
   const {
@@ -30,8 +31,10 @@ const AssigneeSelect = ({issue}: { issue: Issue }) => {
           axios.patch('/api/issues/' + issue.id, {
             assignedTo: userId || null
           })
+          toast.success('Issue has been assigned to User')
         } catch (error) {
           console.log('error: ', error)
+          toast.error('Changes could not be saved')
         }
 
       }}
