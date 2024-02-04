@@ -3,12 +3,10 @@ import { Table, TableColumnHeaderCell } from '@radix-ui/themes'
 import prisma from '@/app/utils/connect'
 import { IssueStatusBadge } from '@/app/components'
 import IssueActions from './IssueActions'
-import delay from 'delay'
 import { Link } from '@/app/components'
 
 const IssuesPage = async () => {
   const issues = await prisma.issue.findMany()
-  await delay(2000)
 
   return (
     <div className="mb-5">
