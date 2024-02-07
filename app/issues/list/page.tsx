@@ -7,9 +7,10 @@ import { Link } from '@/app/components'
 import { Issue, Status } from '@prisma/client'
 import NextLink from 'next/link'
 import { ArrowUpIcon } from '@radix-ui/react-icons'
+import Pagintaion from '@/app/components/Pagintaion'
 
 interface Props {
-  searchParams: { status: Status; orderBy: keyof Issue }
+  searchParams: { status: Status; orderBy: keyof Issue; page: string }
 }
 
 const IssuesPage = async ({ searchParams }: Props) => {
@@ -25,12 +26,19 @@ const IssuesPage = async ({ searchParams }: Props) => {
     ? { [searchParams.orderBy]: 'asc' }
     : undefined
 
+  const page = parseInt(searchParams.page) || 1
+  const PAGE_SIZE = 10
+
   const issues = await prisma.issue.findMany({
     where: {
       status,
     },
     orderBy,
+    skip: (page - 1) * PAGE_SIZE,
+    take: PAGE_SIZE,
   })
+
+  const issueCount = await prisma.issue.count({ where: { status } })
 
   return (
     <div className="mb-5">
@@ -69,6 +77,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
           ))}
         </Table.Body>
       </Table.Root>
+      <Pagintaion pageSize={PAGE_SIZE} currentPage={page} itemCount={issueCount} />
     </div>
   )
 }
