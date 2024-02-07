@@ -11,11 +11,9 @@ interface Props {
   currentPage: number
 }
 
-
-const Pagintaion = ({ itemCount, pageSize, currentPage}: Props) => {
+const Pagintaion = ({ itemCount, pageSize, currentPage }: Props) => {
   const router = useRouter()
   const searchParams = useSearchParams()
-
 
   const pageCount = Math.ceil(itemCount / pageSize)
   if (pageCount <= 1) return null
@@ -27,44 +25,29 @@ const Pagintaion = ({ itemCount, pageSize, currentPage}: Props) => {
   }
 
   return (
-    <Flex align='center' gap='2'>
-      <Text size='2'>
+    <Flex align="center" gap="2">
+      <Text size="2">
         Page {currentPage} of {pageCount}
       </Text>
-      <Button color='gray'
-        variant='soft'
-        disabled={currentPage===1}
-        onClick={() => changePage(1)}
-      >
+      <Button color="gray" variant="soft" disabled={currentPage === 1} onClick={() => changePage(1)}>
         <DoubleArrowLeftIcon />
       </Button>
-      <Button color='gray'
-        variant='soft'
-        disabled={currentPage===1}
-        onClick={() => changePage(currentPage - 1)}
-      >
+      <Button color="gray" variant="soft" disabled={currentPage === 1} onClick={() => changePage(currentPage - 1)}>
         <ChevronLeftIcon />
       </Button>
-      <Button color='gray'
-        variant='soft'
-        disabled={currentPage===pageCount}
+      <Button
+        color="gray"
+        variant="soft"
+        disabled={currentPage === pageCount}
         onClick={() => changePage(currentPage + 1)}
-
       >
         <ChevronRightIcon />
       </Button>
-      <Button color='gray'
-        variant='soft'
-        disabled={currentPage===pageCount}
-        onClick={() => changePage(pageCount)}
-
-      >
+      <Button color="gray" variant="soft" disabled={currentPage === pageCount} onClick={() => changePage(pageCount)}>
         <DoubleArrowRightIcon />
       </Button>
     </Flex>
   )
 }
-
-
 
 export default Pagintaion
