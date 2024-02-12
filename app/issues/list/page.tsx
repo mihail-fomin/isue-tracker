@@ -1,12 +1,7 @@
 import React from 'react'
-import { Table, TableColumnHeaderCell } from '@radix-ui/themes'
 import prisma from '@/app/utils/connect'
-import { IssueStatusBadge } from '@/app/components'
 import IssueActions from './IssueActions'
-import { Link } from '@/app/components'
-import { Issue, Status } from '@prisma/client'
-import NextLink from 'next/link'
-import { ArrowUpIcon } from '@radix-ui/react-icons'
+import { Status } from '@prisma/client'
 import Pagintaion from '@/app/components/Pagintaion'
 import IssueTable, { IssueQuery, columnNames } from './IssueTable'
 
