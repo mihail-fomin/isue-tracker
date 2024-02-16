@@ -1,4 +1,4 @@
-import { Issue, Prisma, Status } from '@prisma/client'
+import { Issue, Status } from '@prisma/client'
 import { Table, TableColumnHeaderCell } from '@radix-ui/themes'
 import React from 'react'
 import NextLink from 'next/link'
