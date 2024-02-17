@@ -17,10 +17,10 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   const assignIssue = async (userId: string) => {
     try {
       await updateIssue(userId)
-      toast.success(userId === 'unassigned' ? 'Issue has unassigned' : 'Issue has been assigned to User')
+      toast.success(userId === 'unassigned' ? 'Привязка задачи снята' : 'Задача была привязана')
       } catch (error) {
       console.log('error: ', error)
-      toast.error('Changes could not be saved')
+      toast.error('Изменения не могут быть сохранены(')
     }
   }
 
@@ -35,8 +35,8 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
       <Select.Trigger placeholder="Assign..." />
       <Select.Content>
         <Select.Group>
-          <Select.Label>Suggestions</Select.Label>
-          <Select.Item value="unassigned">Unassigned</Select.Item>
+          <Select.Label>Варианты</Select.Label>
+          <Select.Item value="unassigned">Не привязано</Select.Item>
           {users?.map((user) => (
             <Select.Item key={user.id} value={user.id}>
               {user.name}

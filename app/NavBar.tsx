@@ -31,8 +31,8 @@ const NavLinks = () => {
   const currentPath = usePathname()
 
   const links = [
-    { label: 'Dashboard', href: '/' },
-    { label: 'Issues', href: '/issues/list' },
+    { label: 'Дашборд', href: '/' },
+    { label: 'Задачи', href: '/issues/list' },
   ]
 
   return (
@@ -62,7 +62,7 @@ const AuthStatus = () => {
   if (status === 'unauthenticated')
     return (
       <Link className="nav-link" href="/api/auth/signin">
-        Login
+        Войти
       </Link>
     )
 
@@ -84,7 +84,7 @@ const AuthStatus = () => {
             <Text size="2">{session!.user!.email}</Text>
           </DropdownMenu.Label>
           <DropdownMenu.Item>
-            <Link href="/api/auth/signout">Log out</Link>
+            <Link href="/api/auth/signout">Выйти</Link>
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Root>

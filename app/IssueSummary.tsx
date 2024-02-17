@@ -17,9 +17,9 @@ interface Container {
 
 const IssueSummary = ({ open, inProgress, closed }: Props) => {
   const containers: Container[] = [
-    { label: 'Open Issues', value: open, status: 'OPEN' },
-    { label: 'In-progress Issues', value: inProgress, status: 'IN_PROGRESS' },
-    { label: 'Closed Issues', value: closed, status: 'CLOSED' },
+    { label: 'Открытые задачи', value: open, status: 'OPEN' },
+    { label: 'Задачи в работе', value: inProgress, status: 'IN_PROGRESS' },
+    { label: 'Закрытые задачи', value: closed, status: 'CLOSED' },
   ]
 
   return (

@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Props) {
 
   return {
     title: issue?.title,
-    description: 'Details of issue ' + issue?.id,
+    description: 'Описание к задаче ' + issue?.id,
   }
 }
 

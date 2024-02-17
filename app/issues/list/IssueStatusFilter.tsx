@@ -15,10 +15,10 @@ const IssueStatusFilter = () => {
   const searchParams = useSearchParams()
 
   const statuses: StatusContent[] = [
-    { label: 'All' },
-    { label: 'Open', value: 'OPEN' },
-    { label: 'In Progress', value: 'IN_PROGRESS' },
-    { label: 'Closed', value: 'CLOSED' },
+    { label: 'Все' },
+    { label: 'Открытые', value: 'OPEN' },
+    { label: 'В работе', value: 'IN_PROGRESS' },
+    { label: 'Закрытые', value: 'CLOSED' },
   ]
 
   /**
@@ -40,7 +40,7 @@ const IssueStatusFilter = () => {
 
   return (
     <Select.Root defaultValue={searchParams.get('status') || ''} onValueChange={handleValueChange}>
-      <Select.Trigger placeholder="Filter by status..." />
+      <Select.Trigger placeholder="Отфильтровать по статусу..." />
       <Select.Content>
         {statuses.map((status) => (
           <Select.Item key={status.label} value={status.value || 'All'}>

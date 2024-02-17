@@ -57,9 +57,9 @@ const IssueTable = async ({ searchParams, issues }: Props) => {
 }
 
 const columns: { label: string; value: keyof Issue; className?: string }[] = [
-  { label: 'Issue', value: 'title' },
-  { label: 'Status', value: 'status', className: 'hidden md:table-cell' },
-  { label: 'CreatedAt', value: 'createdAt', className: 'hidden md:table-cell' },
+  { label: 'Задача', value: 'title' },
+  { label: 'Статус', value: 'status', className: 'hidden md:table-cell' },
+  { label: 'Создано', value: 'createdAt', className: 'hidden md:table-cell' },
 ]
 
 export const columnNames = columns.map((column) => column.value)

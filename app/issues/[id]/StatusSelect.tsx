@@ -34,19 +34,19 @@ const StatusSelect = ({ issue }: { issue: Issue }) => {
         status,
       })
       router.refresh()
-      toast.success('Issue status has been changed')
+      toast.success('Статус задачи обновлен')
     } catch (error) {
       console.log('error: ', error)
-      toast.error('Status could not be saved')
+      toast.error('Статус задачи не может быть обновлен')
     }
   }
 
   return (
     <Select.Root defaultValue={issue.status} onValueChange={assignStatus}>
-      <Select.Trigger  />
+      <Select.Trigger />
       <Select.Content>
         <Select.Group>
-          <Select.Label>Suggestions</Select.Label>
+          <Select.Label>Варианты</Select.Label>
           {statuses?.map((status) => (
             <Select.Item key={status.value} value={status.value}>
               {status.label}

@@ -16,7 +16,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
     try {
       setIsDeleting(true)
       await axios.delete('/api/issues/' + issueId)
-      toast.success('Issue has been deleted')
+      toast.success('Задача была удалена')
       router.push('/issues/list')
       router.refresh()
     } catch (error) {
@@ -30,24 +30,24 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
       <AlertDialog.Root>
         <AlertDialog.Trigger>
           <Button color="red" disabled={isDeleting}>
-            Delete Issue
+            Удалить задачу
             {isDeleting && <Spinner />}
           </Button>
         </AlertDialog.Trigger>
         <AlertDialog.Content>
-          <AlertDialog.Title>Confirm Deletion</AlertDialog.Title>
+          <AlertDialog.Title>Подтвердить удаление</AlertDialog.Title>
           <AlertDialog.Description>
-            Are you sure you want to delete this issue? This action cannot be undone.
+            Вы уверены, что хотите удалит задачу? Данное действие нельзя будет вернуть
           </AlertDialog.Description>
           <Flex mt="4" gap="3" justify='end'>
             <AlertDialog.Cancel>
               <Button variant="soft" color="gray">
-                Cancel
+                Отменить
               </Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
               <Button color="red" onClick={handleDeleteButton}>
-                Delete Issue
+                Удалить задачу
               </Button>
             </AlertDialog.Action>
           </Flex>
@@ -56,7 +56,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
       <AlertDialog.Root open={error}>
         <AlertDialog.Content>
           <AlertDialog.Title>Error</AlertDialog.Title>
-          <AlertDialog.Description>This issue could not be deleted.</AlertDialog.Description>
+          <AlertDialog.Description>Данная задача не может быть удалена.</AlertDialog.Description>
           <Button color="gray" variant="soft" mt="2" onClick={() => setError(false)}>
             OK
           </Button>

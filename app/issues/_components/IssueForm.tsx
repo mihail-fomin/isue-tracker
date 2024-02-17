@@ -35,17 +35,17 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       setSubmitting(true)
       if (issue) {
         await axios.patch('/api/issues/' + issue.id, data)
-        toast.success('Issue has been updated')
+        toast.success('Задача была обновлена')
       } else {
         await axios.post('/api/issues', data)
-        toast.success('Issue has been created')
+        toast.success('Задача была создана')
       }
       router.push('/issues/list')
       router.refresh()
     } catch (error) {
       setSubmitting(false)
-      setError('An unexpected error occurred.')
-      toast.error('Issue could not been created')
+      setError('Произошла внезапная ошибка((')
+      toast.error('Задача не может быть создана')
     }
   })
 
@@ -58,18 +58,18 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       )}
       <form className="space-y-3" onSubmit={onSubmit}>
         <TextField.Root>
-          <TextField.Input defaultValue={issue?.title} placeholder="Title" {...register('title')} />
+          <TextField.Input defaultValue={issue?.title} placeholder="Заголовок" {...register('title')} />
         </TextField.Root>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
         <Controller
           name="description"
           control={control}
           defaultValue={issue?.description}
-          render={({ field }) => <SimpleMDE placeholder="Description" {...field} />}
+          render={({ field }) => <SimpleMDE placeholder="Описание" {...field} />}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button disabled={isSubmitting}>
-          {issue ? 'Update Issue' : 'Submit New Issue'} {isSubmitting && <Spinner />}
+          {issue ? 'Обновить задачу' : 'Опубликовать новую задачу'} {isSubmitting && <Spinner />}
         </Button>
       </form>
     </div>
