@@ -12,8 +12,8 @@ import QueryClientProvider from './QueryClientProvider'
 import NextTopLoader from 'nextjs-toploader'
 
 export const metadata: Metadata = {
-  title: 'Issue tracker',
-  description: 'Track your issues and close them',
+  title: 'Трекер задач',
+  description: 'Отслеживай свои задачи и закрывай их',
 }
 
 const inter = Inter({
