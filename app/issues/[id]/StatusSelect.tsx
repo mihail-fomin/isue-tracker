@@ -24,7 +24,7 @@ const statuses: Container[] = [
 const StatusSelect = ({ issue }: { issue: Issue }) => {
   const router = useRouter()
 
-  const { status, data: session } = useSession()
+  const { status } = useSession()
 
   if (status === 'loading') return <Skeleton />
 
