@@ -73,7 +73,7 @@ const AuthStatus = () => {
           <Avatar
             src={session!.user!.image!}
             fallback="?"
-            size="2"
+            size="3"
             radius="full"
             className="cursor-pointer"
             referrerPolicy="no-referrer"
