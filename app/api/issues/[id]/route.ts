@@ -32,7 +32,7 @@ const informEdition = async ({ issueTitle, description, status, userName }: Mess
 
     await bot.sendMessage(chatId, message, { parse_mode: 'HTML' })
   } catch (error) {
-    console.error(error);
+    console.error(error)
   }
 }
 
