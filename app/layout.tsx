@@ -9,6 +9,7 @@ import { Container, Theme } from '@radix-ui/themes'
 import { Toaster } from 'react-hot-toast'
 import AuthProvider from './auth/Provider'
 import QueryClientProvider from './QueryClientProvider'
+import NextTopLoader from 'nextjs-toploader'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={inter.variable}>
+      <NextTopLoader height={2} color="purple" easing="cubic-bezier(0.53, 0.21, 0.1)" />
         <QueryClientProvider>
           <AuthProvider>
             <Toaster />
