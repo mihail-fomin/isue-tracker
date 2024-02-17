@@ -14,7 +14,7 @@ if (telegramToken) {
   bot = new TelegramBot(telegramToken, { polling: true })
 }
 
-const sendMessage = (title: string, description: string) => {
+const informCreation = (title: string, description: string) => {
   const message = `
   <strong>Новая задача:</strong> ${title}
   <b>Описание задачи:</b> ${description}
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
     data: { title: body.title, description: body.description },
   })
 
-  sendMessage(title, description)
+  informCreation(title, description)
 
   return NextResponse.json(newIssue, { status: 201 })
 }
