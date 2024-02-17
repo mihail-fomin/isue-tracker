@@ -28,9 +28,9 @@ const StatusSelect = ({ issue }: { issue: Issue }) => {
 
   if (status === 'loading') return <Skeleton />
 
-  const assignStatus = (status: Status) => {
+  const assignStatus = async (status: Status) => {
     try {
-      axios.patch('/api/issues/' + issue.id, {
+      await axios.patch('/api/issues/' + issue.id, {
         status,
       })
       router.refresh()
@@ -43,7 +43,7 @@ const StatusSelect = ({ issue }: { issue: Issue }) => {
 
   return (
     <Select.Root defaultValue={issue.status} onValueChange={assignStatus}>
-      <Select.Trigger placeholder="Status..." />
+      <Select.Trigger  />
       <Select.Content>
         <Select.Group>
           <Select.Label>Suggestions</Select.Label>

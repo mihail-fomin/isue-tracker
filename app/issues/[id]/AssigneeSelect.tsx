@@ -14,16 +14,20 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   if (isLoading) return <Skeleton />
   if (error) return null
 
-  const assignIssue = (userId: string) => {
+  const assignIssue = async (userId: string) => {
     try {
-      axios.patch('/api/issues/' + issue.id, {
-        assignedTo: userId === 'unassigned' ? null : userId,
-      })
-      toast.success('Issue has been assigned to User')
-    } catch (error) {
+      await updateIssue(userId)
+      toast.success(userId === 'unassigned' ? 'Issue has unassigned' : 'Issue has been assigned to User')
+      } catch (error) {
       console.log('error: ', error)
       toast.error('Changes could not be saved')
     }
+  }
+
+  const updateIssue = async (userId: string) => {
+    await axios.patch('/api/issues/' + issue.id, {
+      assignedTo: userId === 'unassigned' ? null : userId,
+    })
   }
 
   return (
