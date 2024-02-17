@@ -1105,6 +1105,11 @@
     lodash.merge "^4.6.2"
     postcss-selector-parser "6.0.10"
 
+"@types/caseless@*":
+  version "0.12.5"
+  resolved "https://registry.yarnpkg.com/@types/caseless/-/caseless-0.12.5.tgz#db9468cb1b1b5a925b8f34822f1669df0c5472f5"
+  integrity sha512-hWtVTC2q7hc7xZ/RLbxapMvDMgUnDvKvMOpKal4DrMyfGBUfB1oKaZlIRr6mJL+If3bAP6sV/QneGzF6tJjZDg==
+
 "@types/codemirror@^5.60.4", "@types/codemirror@~5.60.5":
   version "5.60.15"
   resolved "https://registry.yarnpkg.com/@types/codemirror/-/codemirror-5.60.15.tgz#0f82be6f4126d1e59cf4c4830e56dcd49d3c3e8a"
@@ -1211,6 +1216,21 @@
   resolved "https://registry.yarnpkg.com/@types/ms/-/ms-0.7.34.tgz#10964ba0dee6ac4cd462e2795b6bebd407303433"
   integrity sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==
 
+"@types/node-telegram-bot-api@^0.64.2":
+  version "0.64.2"
+  resolved "https://registry.yarnpkg.com/@types/node-telegram-bot-api/-/node-telegram-bot-api-0.64.2.tgz#39ef3f2020d40db234315debf77c2f3f86517675"
+  integrity sha512-+W2OuWB7qTR1aMhk+I+WM2niKrTQpuF9k29f0FGjrhdU67JadlWgFakQq0RslJfFfrl7xDMoq3MKvc73SriXSA==
+  dependencies:
+    "@types/node" "*"
+    "@types/request" "*"
+
+"@types/node@*":
+  version "20.11.19"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.19.tgz#b466de054e9cb5b3831bee38938de64ac7f81195"
+  integrity sha512-7xMnVEcZFu0DikYjWOlRq7NTPETrm7teqUT2WkQjrTIkEgUyyGdWsj/Zg8bEJt5TNklzbPD1X3fqfsHw3SpapQ==
+  dependencies:
+    undici-types "~5.26.4"
+
 "@types/node@^20":
   version "20.11.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.0.tgz#8e0b99e70c0c1ade1a86c4a282f7b7ef87c9552f"
@@ -1244,6 +1264,16 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
+"@types/request@*":
+  version "2.48.12"
+  resolved "https://registry.yarnpkg.com/@types/request/-/request-2.48.12.tgz#0f590f615a10f87da18e9790ac94c29ec4c5ef30"
+  integrity sha512-G3sY+NpsA9jnwm0ixhAFQSJ3Q9JkpLZpJbI3GMv0mIAT0y3mRabYeINzal5WOChIiaTEGQYlHOKgkaM9EisWHw==
+  dependencies:
+    "@types/caseless" "*"
+    "@types/node" "*"
+    "@types/tough-cookie" "*"
+    form-data "^2.5.0"
+
 "@types/scheduler@*":
   version "0.16.8"
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.8.tgz#ce5ace04cfeabe7ef87c0091e50752e36707deff"
@@ -1255,6 +1285,11 @@
   integrity sha512-ypzHFE/wBzh+BlH6rrBgS5I/Z7RD21pGhZ2rltb/+ZrVM1awdZwjx7hE5XfuYgHWk9uvV5HLZN3SloevCAp3Bw==
   dependencies:
     "@types/estree" "*"
+
+"@types/tough-cookie@*":
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/@types/tough-cookie/-/tough-cookie-4.0.5.tgz#cb6e2a691b70cb177c6e3ae9c1d2e8b2ea8cd304"
+  integrity sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==
 
 "@types/unist@*", "@types/unist@^3.0.0":
   version "3.0.2"
@@ -2548,6 +2583,15 @@ forever-agent@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
   integrity sha512-j0KLYPhm6zeac4lz3oJ3o65qvgQCcPubiyotZrXqEaG4hNagNYO8qdlUrX5vwqv9ohqeT/Z3j6+yW067yWWdUw==
+
+form-data@^2.5.0:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.5.1.tgz#f2cbec57b5e59e23716e128fe44d4e5dd23895f4"
+  integrity sha512-m21N3WOmEEURgk6B9GLOE4RuWOFf28Lhh9qGYeNlGq4VDXUlJy2th2slBNU8Gp8EzloYZOibZJ7t5ecIrFSjVA==
+  dependencies:
+    asynckit "^0.4.0"
+    combined-stream "^1.0.6"
+    mime-types "^2.1.12"
 
 form-data@^4.0.0:
   version "4.0.0"
