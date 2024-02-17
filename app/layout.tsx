@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={inter.variable}>
-      <NextTopLoader height={3} color="purple" easing="cubic-bezier(0.53, 0.21, 0.1)" showSpinner={false}/>
+        <NextTopLoader height={3} color="purple" easing="cubic-bezier(0.53, 0.21, 0.1)" showSpinner={false} />
         <QueryClientProvider>
           <AuthProvider>
             <Toaster />

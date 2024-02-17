@@ -39,7 +39,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
           <AlertDialog.Description>
             Вы уверены, что хотите удалит задачу? Данное действие нельзя будет вернуть
           </AlertDialog.Description>
-          <Flex mt="4" gap="3" justify='end'>
+          <Flex mt="4" gap="3" justify="end">
             <AlertDialog.Cancel>
               <Button variant="soft" color="gray">
                 Отменить
