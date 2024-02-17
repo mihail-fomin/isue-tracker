@@ -18,7 +18,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
     try {
       await updateIssue(userId)
       toast.success(userId === 'unassigned' ? 'Привязка задачи снята' : 'Задача была привязана')
-      } catch (error) {
+    } catch (error) {
       console.log('error: ', error)
       toast.error('Изменения не могут быть сохранены(')
     }
@@ -32,7 +32,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
 
   return (
     <Select.Root defaultValue={issue.userId || ''} onValueChange={assignIssue}>
-      <Select.Trigger placeholder="Assign..." />
+      <Select.Trigger placeholder="Прикрепить..." />
       <Select.Content>
         <Select.Group>
           <Select.Label>Варианты</Select.Label>

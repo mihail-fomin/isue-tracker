@@ -15,11 +15,10 @@ interface Container {
 }
 
 const statuses: Container[] = [
-  { label: 'Open', value: 'OPEN' },
-  { label: 'In-progress', value: 'IN_PROGRESS' },
-  { label: 'Closed', value: 'CLOSED' },
+  { label: 'Отрыто', value: 'OPEN' },
+  { label: 'В работе', value: 'IN_PROGRESS' },
+  { label: 'Закрыто', value: 'CLOSED' },
 ]
-
 
 const StatusSelect = ({ issue }: { issue: Issue }) => {
   const router = useRouter()
