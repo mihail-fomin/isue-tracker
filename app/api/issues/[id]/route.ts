@@ -43,7 +43,7 @@ const informDeletion = async (issueTitle: string) => {
 
     await bot.sendMessage(chatId, message, { parse_mode: 'HTML' })
   } catch (error) {
-    console.error( error)
+    console.error(error)
   }
 }
 
