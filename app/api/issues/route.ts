@@ -6,7 +6,7 @@ import authOptions from '@/app/auth/authOptions'
 import TelegramBot from 'node-telegram-bot-api'
 
 const telegramToken = process.env.TG_TOKEN
-const chatId = '-4157860383'
+const chatId = '-1002016925780'
 
 let bot: TelegramBot
 

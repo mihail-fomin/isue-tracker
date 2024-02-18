@@ -36,6 +36,17 @@ const informEdition = async ({ issueTitle, description, status, userName }: Mess
   }
 }
 
+const informDeletion = async (issueTitle: string) => {
+  try {
+    const message = `<strong>Удалена задача:</strong> ${issueTitle}
+    `
+
+    await bot.sendMessage(chatId, message, { parse_mode: 'HTML' })
+  } catch (error) {
+    console.error( error)
+  }
+}
+
 export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions)
   if (!session) return NextResponse.json({}, { status: 401 })
@@ -109,6 +120,10 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
   await prisma.issue.delete({
     where: { id: issue.id },
   })
+
+  const issueTitle = issue.title
+
+  informDeletion(issueTitle)
 
   return NextResponse.json({})
 }
