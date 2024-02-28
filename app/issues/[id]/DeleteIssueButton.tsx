@@ -29,7 +29,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button color="red" disabled={isDeleting}>
+          <Button color="ruby" disabled={isDeleting} className='bg-red-700'>
             Удалить задачу
             {isDeleting && <Spinner />}
           </Button>
@@ -37,7 +37,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
         <AlertDialog.Content>
           <AlertDialog.Title>Подтвердить удаление</AlertDialog.Title>
           <AlertDialog.Description>
-            Вы уверены, что хотите удалит задачу? Данное действие нельзя будет вернуть
+            Вы уверены, что хотите удалить задачу? Данное действие нельзя будет вернуть
           </AlertDialog.Description>
           <Flex mt="4" gap="3" justify="end">
             <AlertDialog.Cancel>
@@ -46,7 +46,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: string }) => {
               </Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
-              <Button color="red" onClick={handleDeleteButton}>
+              <Button color="ruby" onClick={handleDeleteButton}>
                 Удалить задачу
               </Button>
             </AlertDialog.Action>
