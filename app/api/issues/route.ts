@@ -3,25 +3,7 @@ import prisma from '@/app/utils/connect'
 import { issueSchema } from '../issueSchema'
 import { getServerSession } from 'next-auth'
 import authOptions from '@/app/auth/authOptions'
-import TelegramBot from 'node-telegram-bot-api'
-
-const telegramToken = process.env.TG_TOKEN
-const chatId = '-1002016925780'
-
-let bot: TelegramBot
-
-if (telegramToken) {
-  bot = new TelegramBot(telegramToken, { polling: true })
-}
-
-const informCreation = (title: string, description: string) => {
-  const message = `
-  <strong>Новая задача:</strong> ${title}
-  <b>Описание задачи:</b> ${description}
-  `
-
-  bot.sendMessage(chatId, message, { parse_mode: 'HTML' })
-}
+import { informCreation } from '@/app/utils/telegram'
 
 export async function POST(req: NextRequest) {
   const body = await req.json()
@@ -41,7 +23,8 @@ export async function POST(req: NextRequest) {
     data: { title: body.title, description: body.description },
   })
 
-  informCreation(title, description)
+  const id = newIssue.id
+  informCreation(id, title, description)
 
   return NextResponse.json(newIssue, { status: 201 })
 }

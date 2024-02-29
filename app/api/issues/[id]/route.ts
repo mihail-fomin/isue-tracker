@@ -3,49 +3,7 @@ import { patchIssueSchema } from '@/app/api/issueSchema'
 import prisma from '@/app/utils/connect'
 import { getServerSession } from 'next-auth'
 import authOptions from '@/app/auth/authOptions'
-import TelegramBot from 'node-telegram-bot-api'
-
-const telegramToken = process.env.TG_TOKEN
-const chatId = '-1002016925780'
-
-let bot: TelegramBot
-
-if (telegramToken) {
-  bot = new TelegramBot(telegramToken, { polling: true })
-}
-
-interface MessageFields {
-  issueTitle: string
-  description?: string
-  status?: string
-  userName?: string | null
-}
-
-const informEdition = async ({ issueTitle, description, status, userName }: MessageFields) => {
-  try {
-    let message = `
-    <strong>Обновлена задача:</strong> ${issueTitle}
-    `
-    if (description) message += `<b>Описание задачи:</b> ${description}`
-    if (status) message += `<b>Статус задачи:</b> ${status}`
-    if (userName) message += `<b>Закреплено за:</b> ${userName}`
-
-    await bot.sendMessage(chatId, message, { parse_mode: 'HTML' })
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-const informDeletion = async (issueTitle: string) => {
-  try {
-    const message = `<strong>Удалена задача:</strong> ${issueTitle}
-    `
-
-    await bot.sendMessage(chatId, message, { parse_mode: 'HTML' })
-  } catch (error) {
-    console.error(error)
-  }
-}
+import { informDeletion, informEdition } from '@/app/utils/telegram'
 
 export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions)
@@ -61,7 +19,9 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
   const { assignedTo, title, description, status } = body
 
   let userName
-  let issueTitle
+  let oldIssueTitle
+
+  const newIssueTitle = title
 
   if (assignedTo) {
     const user = await prisma.user.findUnique({
@@ -83,10 +43,11 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
     return NextResponse.json({ error: 'Invalid issue' }, { status: 400 })
   }
 
-  issueTitle = issue.title
+  oldIssueTitle = issue.title
+  const id = issue.id
 
   const updatedIssue = await prisma.issue.update({
-    where: { id: issue.id },
+    where: { id },
     data: {
       title,
       description,
@@ -101,7 +62,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
     },
   })
 
-  informEdition({ issueTitle, description, status, userName })
+  informEdition({ id, newIssueTitle, oldIssueTitle, description, status, userName })
   return NextResponse.json(updatedIssue)
 }
 
