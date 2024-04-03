@@ -9,6 +9,8 @@ import authOptions from '@/app/auth/authOptions'
 import AssigneeSelect from './AssigneeSelect'
 import { cache } from 'react'
 import StatusSelect from './StatusSelect'
+import Comments from '@/app/components/Comments/CommentsBlock'
+import CommentsBlock from '@/app/components/Comments/CommentsBlock'
 
 interface Props {
   params: { id: string }
@@ -20,7 +22,6 @@ const IssueDetailPage = async ({ params }: Props) => {
   const session = await getServerSession(authOptions)
 
   const issue = await fetchUser(params.id)
-
   if (!issue) notFound()
 
   return (
@@ -28,6 +29,7 @@ const IssueDetailPage = async ({ params }: Props) => {
       <Box className="md:col-span-5">
         <IssueDetails issue={issue} />
       </Box>
+      <CommentsBlock issueId={params.id}/>
       {session && (
         <Box>
           <Flex direction="column" gap="4">
