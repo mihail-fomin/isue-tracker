@@ -9,7 +9,6 @@ import authOptions from '@/app/auth/authOptions'
 import AssigneeSelect from './AssigneeSelect'
 import { cache } from 'react'
 import StatusSelect from './StatusSelect'
-import Comments from '@/app/components/Comments/CommentsBlock'
 import CommentsBlock from '@/app/components/Comments/CommentsBlock'
 
 interface Props {
