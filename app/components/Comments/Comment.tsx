@@ -2,8 +2,14 @@ import prisma from '@/app/utils/connect'
 import { Comment } from '@prisma/client'
 import { Avatar, Card, Flex, Text } from '@radix-ui/themes'
 import React from 'react'
+import RemoveButton from './DeletteCommentButton'
 
-const CommentInfo = async ({ comment }: { comment: Comment }) => {
+interface Props {
+  comment: Comment
+  userId?: string
+}
+
+const CommentInfo = async ({ comment, userId }: Props) => {
   const author = await prisma.user.findUnique({ where: { id: comment.userId } })
 
   return (
@@ -13,6 +19,7 @@ const CommentInfo = async ({ comment }: { comment: Comment }) => {
         <Flex justify="between" align="center" className="w-full">
           <Text>{author?.name}</Text>
           <Text>{comment.createdAt.toDateString()}</Text>
+          {comment.userId === userId && <RemoveButton commentId={comment.id} />}
         </Flex>
       </Flex>
       <Text>{comment.content}</Text>
