@@ -29,7 +29,7 @@ export const informCreation = (id: string, title: string, description: string) =
     message += `
     Посмотреть задачу: ${URI}issues/${id}
     `
-    
+
     bot.sendMessage(chatId, message, { parse_mode: 'HTML' })
   } catch (error) {
     console.error(error)

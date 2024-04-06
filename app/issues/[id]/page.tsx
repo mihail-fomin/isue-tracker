@@ -15,36 +15,38 @@ interface Props {
   params: { id: string }
 }
 
-const fetchUser = cache((issueId: string) => prisma.issue.findUnique({ where: { id: issueId } }))
+const fetchIssue = cache((issueId: string) => prisma.issue.findUnique({ where: { id: issueId } }))
 
 const IssueDetailPage = async ({ params }: Props) => {
   const session = await getServerSession(authOptions)
 
-  const issue = await fetchUser(params.id)
+  const issue = await fetchIssue(params.id)
   if (!issue) notFound()
 
   return (
     <Grid columns={{ initial: '1', md: '5' }} gap="5">
-      <Box className="md:col-span-5">
-        <IssueDetails issue={issue} />
-      </Box>
-      <CommentsBlock issueId={params.id}/>
       {session && (
         <Box>
-          <Flex direction="column" gap="4">
+          <Flex gap="4">
             <AssigneeSelect issue={issue} />
             <StatusSelect issue={issue} />
+          </Flex>
+          <Flex gap="4" mt="2">
             <EditIssueButton issueId={issue.id} />
             <DeleteIssueButton issueId={issue.id} />
           </Flex>
         </Box>
       )}
+      <Box className="md:col-span-5">
+        <IssueDetails issue={issue} />
+      </Box>
+      <CommentsBlock issue={issue} />
     </Grid>
   )
 }
 
 export async function generateMetadata({ params }: Props) {
-  const issue = await fetchUser(params.id)
+  const issue = await fetchIssue(params.id)
 
   return {
     title: issue?.title,
