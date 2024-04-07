@@ -18,7 +18,7 @@ const CommentsBlock = async ({ issue }: { issue: Issue }) => {
   const comments = await prisma.comment.findMany({ where: { issueId: issue.id } })
 
   const user = await getCurrentUser()
-
+  
   return (
     <Box className="md:col-span-5">
       <ul>
@@ -26,7 +26,7 @@ const CommentsBlock = async ({ issue }: { issue: Issue }) => {
           <Comment key={comment.id} comment={comment} userId={user?.id} />
         ))}
       </ul>
-      <CommentField issue={issue} userId={user?.id} />
+      {user && <CommentField issue={issue} userId={user?.id} />}
     </Box>
   )
 }
