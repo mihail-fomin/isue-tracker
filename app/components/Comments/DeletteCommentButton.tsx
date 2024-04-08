@@ -11,20 +11,18 @@ import { AlertDialog, Button, Flex } from '@radix-ui/themes'
 const RemoveButton = ({ commentId }: { commentId: string }) => {
   const router = useRouter()
   // const [error, setError] = React.useState<boolean>(false)
-  // const [open, setOpen] = React.useState<boolean>(false)
   const [isDeleting, setIsDeleting] = React.useState<boolean>(false)
 
   const handleDeleteButton = async () => {
     try {
-      await axios.delete('/api/comments/' + commentId)
-      toast.success('Комментарий был удален')
-      router.refresh()
+        await axios.delete('/api/comments/' + commentId)
+        toast.success('Комментарий был удален')
+        router.refresh()
+        setIsDeleting(false)
     } catch (error) {
       console.error(error)
       setIsDeleting(false)
       // setError(true)
-    } finally {
-      setIsDeleting(false)
     }
   }
   return (
@@ -35,13 +33,13 @@ const RemoveButton = ({ commentId }: { commentId: string }) => {
       >
       {isDeleting ? <Spinner /> : <AiFillDelete />}
     </button>
-    {/* <AlertDialog.Root open={isDeleting}>
+    <AlertDialog.Root open={isDeleting}>
         <AlertDialog.Content>
           <AlertDialog.Title>Подтвердить удаление</AlertDialog.Title>
           <AlertDialog.Description>Вы уверены что хотите удалить комментарий?</AlertDialog.Description>
           <Flex mt="4" gap="3" justify="end">
             <AlertDialog.Cancel>
-              <Button variant="soft" color="gray">
+              <Button variant="soft" color="gray" onClick={() => setIsDeleting(false)}>
                 Отменить
               </Button>
             </AlertDialog.Cancel>
@@ -52,7 +50,7 @@ const RemoveButton = ({ commentId }: { commentId: string }) => {
             </AlertDialog.Action>
           </Flex>
         </AlertDialog.Content>
-      </AlertDialog.Root>     */}
+    </AlertDialog.Root>
     </>
   )
 }
