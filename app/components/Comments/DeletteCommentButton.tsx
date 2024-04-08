@@ -15,10 +15,10 @@ const RemoveButton = ({ commentId }: { commentId: string }) => {
 
   const handleDeleteButton = async () => {
     try {
-        await axios.delete('/api/comments/' + commentId)
-        toast.success('Комментарий был удален')
-        router.refresh()
-        setIsDeleting(false)
+      await axios.delete('/api/comments/' + commentId)
+      toast.success('Комментарий был удален')
+      router.refresh()
+      setIsDeleting(false)
     } catch (error) {
       console.error(error)
       setIsDeleting(false)
@@ -27,13 +27,13 @@ const RemoveButton = ({ commentId }: { commentId: string }) => {
   }
   return (
     <>
-    <button
-      className="flex justify-center items-center w-10 h-10 rounded-full transition hover:bg-slate-200"
-      onClick={() => setIsDeleting(true)}
+      <button
+        className="flex justify-center items-center w-10 h-10 rounded-full transition hover:bg-slate-200"
+        onClick={() => setIsDeleting(true)}
       >
-      {isDeleting ? <Spinner /> : <AiFillDelete />}
-    </button>
-    <AlertDialog.Root open={isDeleting}>
+        {isDeleting ? <Spinner /> : <AiFillDelete />}
+      </button>
+      <AlertDialog.Root open={isDeleting}>
         <AlertDialog.Content>
           <AlertDialog.Title>Подтвердить удаление</AlertDialog.Title>
           <AlertDialog.Description>Вы уверены что хотите удалить комментарий?</AlertDialog.Description>
@@ -50,7 +50,7 @@ const RemoveButton = ({ commentId }: { commentId: string }) => {
             </AlertDialog.Action>
           </Flex>
         </AlertDialog.Content>
-    </AlertDialog.Root>
+      </AlertDialog.Root>
     </>
   )
 }
