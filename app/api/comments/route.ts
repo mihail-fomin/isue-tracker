@@ -15,7 +15,5 @@ export async function POST(req: NextRequest) {
     data: { content, userId, issueId },
   })
 
-  console.log('newComment: ', newComment)
-
   return NextResponse.json(newComment, { status: 201 })
 }

@@ -7,11 +7,9 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
   const session = await getServerSession(authOptions)
   if (!session) return NextResponse.json({}, { status: 401 })
 
-  const newComment = await prisma.comment.delete({
+  const deletedComment = await prisma.comment.delete({
     where: { id: params.id },
   })
 
-  console.log('newComment: ', newComment)
-
-  return NextResponse.json(newComment, { status: 201 })
+  return NextResponse.json(deletedComment, { status: 202 })
 }
