@@ -20,7 +20,7 @@ if (telegramToken) {
   bot = new TelegramBot(telegramToken, { polling: true })
 }
 
-export const informCreation = (id: string, title: string, description: string) => {
+export const informCreation = async (id: string, title: string, description: string) => {
   try {
     let message = `
     <strong>Новая задача:</strong> ${title}
@@ -30,7 +30,7 @@ export const informCreation = (id: string, title: string, description: string) =
     Посмотреть задачу: ${URI}issues/${id}
     `
 
-    bot.sendMessage(chatId, message, { parse_mode: 'HTML' })
+    await bot.sendMessage(chatId, message, { parse_mode: 'HTML' })
   } catch (error) {
     console.error(error)
   }
