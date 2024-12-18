@@ -61,12 +61,21 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           <TextField.Input defaultValue={issue?.title} placeholder="Заголовок" {...register('title')} />
         </TextField.Root>
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
+
         <Controller
           name="description"
           control={control}
-          defaultValue={issue?.description}
-          render={({ field }) => <SimpleMDE placeholder="Описание" {...field} />}
+          defaultValue={issue?.description || ''}
+          render={({ field }) => (
+            <SimpleMDE
+              {...field}
+              placeholder="Описание"
+              value={field.value} // Ensures binding
+              onChange={(value) => field.onChange(value)} // Handles changes
+            />
+          )}
         />
+
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button disabled={isSubmitting}>
           {issue ? 'Обновить задачу' : 'Опубликовать новую задачу'} {isSubmitting && <Spinner />}
