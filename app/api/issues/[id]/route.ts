@@ -5,7 +5,8 @@ import { getServerSession } from 'next-auth'
 import authOptions from '@/app/auth/authOptions'
 import { informDeletion, informEdition } from '@/app/utils/telegram'
 
-export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const session = await getServerSession(authOptions)
   if (!session) return NextResponse.json({}, { status: 401 })
 
@@ -66,7 +67,8 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
   return NextResponse.json(updatedIssue)
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const session = await getServerSession(authOptions)
   if (!session) return NextResponse.json({}, { status: 401 })
 

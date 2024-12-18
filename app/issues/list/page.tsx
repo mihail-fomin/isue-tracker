@@ -7,10 +7,11 @@ import IssueTable, { IssueQuery, columnNames } from './IssueTable'
 import { Metadata } from 'next'
 
 interface Props {
-  searchParams: IssueQuery
+  searchParams: Promise<IssueQuery>
 }
 
-const IssuesPage = async ({ searchParams }: Props) => {
+const IssuesPage = async (props: Props) => {
+  const searchParams = await props.searchParams;
   const statuses = Object.values(Status)
   const status = statuses.includes(searchParams.status) ? searchParams.status : undefined
 
