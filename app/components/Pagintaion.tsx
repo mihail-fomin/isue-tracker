@@ -3,7 +3,7 @@
 import { ChevronLeftIcon, ChevronRightIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon } from '@radix-ui/react-icons'
 import { Button, Flex, Text } from '@radix-ui/themes'
 import { useRouter, useSearchParams } from 'next/navigation'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 interface Props {
   itemCount: number
@@ -50,4 +50,10 @@ const Pagintaion = ({ itemCount, pageSize, currentPage }: Props) => {
   )
 }
 
-export default Pagintaion
+export default function PagintaionWrapper(props: Props) {
+    return (
+      <Suspense>
+        <Pagintaion {...props} />
+      </Suspense>
+    )
+  }
