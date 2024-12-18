@@ -22,7 +22,7 @@ const CommentField = ({ issue, userId }: Props) => {
 
   const issueId = issue.id
 
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, reset } = useForm()
 
   const onSubmit = handleSubmit(async (comment) => {
     const content = comment.content
@@ -37,6 +37,7 @@ const CommentField = ({ issue, userId }: Props) => {
       await axios.post('/api/comments/', data)
       toast.success('Комментарий был опубликован')
       router.refresh()
+      reset()
     } catch (error) {
       setSubmitting(false)
       setError(true)
@@ -49,7 +50,7 @@ const CommentField = ({ issue, userId }: Props) => {
   return (
     <>
       <form className="space-y-3 max-w-xl" onSubmit={onSubmit}>
-        <TextArea defaultValue="Комментарий" {...register('content')} />
+        <TextArea placeholder='Ваш комментарий' {...register('content')} />
         <Button disabled={isSubmitting}>
           {'Опубликовать комментарий'} {isSubmitting && <Spinner />}
         </Button>
