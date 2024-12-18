@@ -56,4 +56,4 @@ export default function PagintaionWrapper(props: Props) {
         <Pagintaion {...props} />
       </Suspense>
     )
-  }
+}
