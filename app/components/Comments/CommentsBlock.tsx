@@ -20,7 +20,7 @@ const CommentsBlock = async ({ issue }: { issue: Issue }) => {
   const user = await getCurrentUser()
   
   return (
-    <Box className="md:col-span-5">
+    <Box data-name="comments-block" className="md:col-span-5 md:max-w-[30rem]">
       <ul>
         {comments.map((comment) => (
           <Comment key={comment.id} comment={comment} userId={user?.id} />

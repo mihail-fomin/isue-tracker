@@ -13,7 +13,7 @@ const CommentInfo = async ({ comment, userId }: Props) => {
   const author = await prisma.user.findUnique({ where: { id: comment.userId } })
 
   return (
-    <Card className="max-w-[30rem]" mb="2">
+    <Card data-name="comment-card" mb="2">
       <Flex gap="3">
         <Avatar src={author?.image!} fallback="?" size="3" radius="full" referrerPolicy="no-referrer" />
         <Flex justify="between" align="center" className="w-full">

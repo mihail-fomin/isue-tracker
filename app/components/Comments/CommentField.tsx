@@ -49,7 +49,11 @@ const CommentField = ({ issue, userId }: Props) => {
 
   return (
     <>
-      <form className="space-y-3 max-w-xl" onSubmit={onSubmit}>
+      <form
+        data-name="comment-field"
+        className="space-y-3"
+        onSubmit={onSubmit}
+      >
         <TextArea placeholder='Ваш комментарий' {...register('content')} />
         <Button disabled={isSubmitting}>
           {'Опубликовать комментарий'} {isSubmitting && <Spinner />}
