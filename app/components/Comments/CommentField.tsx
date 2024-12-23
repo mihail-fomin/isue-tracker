@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -8,36 +8,51 @@ import axios from 'axios'
 
 import { AlertDialog, Button, TextArea } from '@radix-ui/themes'
 import Spinner from '../Spinner'
-import { Issue } from '@prisma/client'
+import { Comment, Issue } from '@prisma/client'
 
 interface Props {
   issue: Issue
-  userId?: string
+  userId: string
+  onAddComment: (newComment: Comment) => void
 }
 
-const CommentField = ({ issue, userId }: Props) => {
+const CommentForm = ({ issue, userId, onAddComment }: Props) => {
   const [isSubmitting, setSubmitting] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
   const router = useRouter()
+  const formRef = useRef<HTMLFormElement>(null)
 
   const issueId = issue.id
 
-  const { register, handleSubmit, reset } = useForm()
+  const { register } = useForm()
 
-  const onSubmit = handleSubmit(async (comment) => {
-    const content = comment.content
+  const formAction = async(formData: FormData) => {
+    const content = formData.get('content')?.toString() || ''
+
+    const newComment = {
+      id: `temp-comment-${Date.now()}`,
+      content,
+      issueId,
+      userId,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }
+  
     try {
+      setSubmitting(true)
+
+      onAddComment(newComment)
+
       const data = {
         content,
         issueId,
         userId,
       }
-      setSubmitting(true)
-
+  
       await axios.post('/api/comments/', data)
       toast.success('Комментарий был опубликован')
+      formRef.current?.reset() // Сброс формы
       router.refresh()
-      reset()
     } catch (error) {
       setSubmitting(false)
       setError(true)
@@ -45,14 +60,16 @@ const CommentField = ({ issue, userId }: Props) => {
     } finally {
       setSubmitting(false)
     }
-  })
+  }
+  
 
   return (
     <>
       <form
         data-name="comment-field"
         className="space-y-3"
-        onSubmit={onSubmit}
+        ref={formRef}
+        action={formAction}
       >
         <TextArea placeholder='Ваш комментарий' {...register('content')} />
         <Button disabled={isSubmitting}>
@@ -72,4 +89,4 @@ const CommentField = ({ issue, userId }: Props) => {
   )
 }
 
-export default CommentField
+export default CommentForm
