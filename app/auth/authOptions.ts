@@ -18,6 +18,14 @@ const authOptions: NextAuthOptions = {
         clientSecret,
     })
   ],
+  callbacks: {
+    async signIn({ user, account }) {
+      if (account) {
+        account.user_id = String(account.user_id);
+      }
+      return true;
+    },
+  },
   session: {
     strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, // 30 days
