@@ -20,10 +20,8 @@ const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async signIn({ user, account }) {
-        console.log('account: ', account);
-        console.log('user: ', user);
       if (account) {
-        account.user_id = String(account.user_id);
+        account.userId = String(account.user_id);
       }
       return true;
     },
