@@ -19,12 +19,24 @@ const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
-    async signIn({ user, account }) {
-      if (account) {
-        account.userId = String(account.user_id);
-      }
-      return true;
-    },
+    // async signIn({ user, account }) {
+    //   if (account) {
+    //     account.userId = String(account.user_id);
+    //   }
+    //   return true;
+    // },
+    async jwt({ token, account }) {
+        // Persist the OAuth access_token to the token right after signin
+        if (account) {
+          token.userId = account.user_id
+        }
+        return token
+      },
+    //   async session({ session, token, user }) {
+    //     // Send properties to the client, like an access_token from a provider.
+    //     session.accessToken = token.accessToken
+    //     return session
+    //   }
   },
   session: {
     strategy: 'jwt',
