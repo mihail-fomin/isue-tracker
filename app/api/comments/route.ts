@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from 'next/server'
 export async function POST(req: NextRequest) {
   const body = await req.json()
 
-  const { content, userId, issueId } = body
+  const { content, user_id as userId, issueId } = body
 
   const session = await getServerSession(authOptions)
   if (!session) return NextResponse.json({}, { status: 401 })
