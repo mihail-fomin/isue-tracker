@@ -30,7 +30,7 @@ enum Status {
 
 model Account {
   id                String  @id @default(cuid()) @map("_id")
-  user_id                        String
+  userId            String
   type              String
   provider          String
   providerAccountId String
@@ -41,9 +41,8 @@ model Account {
   scope             String?
   id_token          String? @db.String
   session_state     String?
-  email             String?
 
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
